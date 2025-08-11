@@ -1,3 +1,4 @@
+#define _POSIX_C_SOURCE 200809L
 #include "config.h"
 #include "singleton.h"
 #include "logger.h"
@@ -14,6 +15,7 @@
 #include <sys/wait.h>
 #include <arpa/inet.h>
 #include <time.h>
+#include <fcntl.h>
 
 #define CONF_FILE "/etc/logmgrd.conf"
 #define SOMEIP_PORT 30501
@@ -43,7 +45,7 @@ void daemonize(void) {
     if (pid < 0) exit(1);
     if (pid > 0) exit(0);
     umask(0);
-    chdir("/");
+    if (chdir("/") != 0) exit(1); // 检查返回值
     for (int fd = 0; fd < 64; fd++) close(fd);
     open("/dev/null", O_RDWR);
     dup(0);
