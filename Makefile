@@ -2,11 +2,11 @@
 
 CC      := gcc
 CFLAGS  := -Wall -O2 -pthread
-TARGET  := logmgrd
 PREFIX  := /usr/local
 
 SRCDIR  := src
 OBJDIR  := build
+TARGET  := $(OBJDIR)/logmgrd
 
 SRCS := $(wildcard $(SRCDIR)/*.c)
 OBJS := $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRCS))
@@ -27,6 +27,10 @@ $(TARGET): $(OBJS)
 
 clean:
 	rm -rf $(OBJDIR) $(TARGET)
+
+output:
+	mkdir -p output
+	cp $(TARGET) output/
 
 install: $(TARGET)
 	mkdir -p $(DESTDIR)$(PREFIX)/bin

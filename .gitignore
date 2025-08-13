@@ -27,7 +27,7 @@
 *.so
 *.so.*
 *.dylib
-
+    
 # Executables
 *.exe
 *.out
@@ -51,6 +51,8 @@ Module.symvers
 Mkfile.old
 dkms.conf
 build
+output
 
 # debug information files
-*.dwo
+*.dwo    
+ 
